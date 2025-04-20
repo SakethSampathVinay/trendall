@@ -7,7 +7,7 @@ import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency } = useContext(ShopContext);
+  const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [sizeEl, setSizeEl] = useState("");
@@ -17,14 +17,13 @@ const Product = () => {
       if (product._id === productId) {
         setProductData(product);
         setImage(product.image[0]);
-        console.log(product.image[0]);
-        console.log(product);
       }
     });
   };
 
   useEffect(() => {
     fetchProductData();
+    window.scrollTo(0, 0);
   }, [products, productId]);
 
   return (
@@ -79,7 +78,10 @@ const Product = () => {
                   ))}
                 </div>
               </div>
-              <button className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 ">
+              <button
+                onClick={() => addToCart(productData._id, sizeEl)}
+                className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 "
+              >
                 ADD TO CART
               </button>
               <hr className="mt-8 sm:2-4/5" />
@@ -96,8 +98,21 @@ const Product = () => {
               <p className="border px-5 py-3 text-sm">Reviews {122}</p>
             </div>
             <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
-              <p>An e-commerce dummy text</p>
-              <p>E Commerce websites typically display</p>
+              <p>
+                Trendall is your go-to fashion destination for the latest trends
+                in clothing and style. From casual basics to statement pieces,
+                we bring you high-quality apparel for every occasion. Discover a
+                seamless shopping experience with fast delivery and easy
+                returns. Stay ahead in style — only with Trendall.
+              </p>
+              <p>
+                At Trendall, we believe fashion should be accessible,
+                expressive, and effortless. Our curated collections are updated
+                regularly to keep up with the ever-evolving style scene. Whether
+                you're dressing for college, work, or a night out, Trendall has
+                something for everyone. Join thousands of fashion-forward users
+                and redefine your wardrobe with confidence.
+              </p>
             </div>
           </div>
 

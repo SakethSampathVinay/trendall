@@ -14,6 +14,7 @@ const RelatedProducts = ({ category, subCategory }) => {
         );
       });
       setRelatedProduct(filteredProducts.slice(0, 5));
+      window.scrollTo(0, 0);
     }
   }, [category, subCategory, products]);
 

@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import Footer from "./components/Footer.jsx";
 import Collections from "./pages/Collections.jsx";
 import Product from "./pages/Product.jsx";
+import Cart from "./pages/Cart.jsx";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collections />} />
         <Route path="/product/:productId" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </div>
