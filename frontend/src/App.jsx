@@ -6,6 +6,7 @@ import Footer from "./components/Footer.jsx";
 import Collections from "./pages/Collections.jsx";
 import Product from "./pages/Product.jsx";
 import Cart from "./pages/Cart.jsx";
+import PlaceOrder from "./pages/PlaceOrder.jsx";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/collection" element={<Collections />} />
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/place-order" element={<PlaceOrder />} />
       </Routes>
       <Footer />
     </div>

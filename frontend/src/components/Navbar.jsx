@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { assets } from "../assets/assets.js";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { ShopContext } from "../Context/ShopContext.jsx";
 
 const Navbar = () => {
+  const { getTotalItemsCount } = useContext(ShopContext);
   const [visible, setVisible] = useState(false);
 
   return (
@@ -37,7 +39,7 @@ const Navbar = () => {
         <Link to="/cart" className="relative">
           <img src={assets.cart_icon} className="w-5 cursor-pointer" alt="" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black rounded-full text-white">
-            0
+            {getTotalItemsCount()}
           </p>
         </Link>
         <img

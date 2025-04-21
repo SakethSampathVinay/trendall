@@ -1,10 +1,17 @@
 import React, { useContext, useEffect, useState, Fragment } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import { assets } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { products, cartItems, updateQuantity, getTotalPrice, delivery_fee } =
-    useContext(ShopContext);
+  const {
+    products,
+    cartItems,
+    updateQuantity,
+    getTotalPrice,
+    delivery_fee,
+    getTotalItemsCount,
+  } = useContext(ShopContext);
   const [cartArray, setCartArray] = useState([]);
 
   useEffect(() => {
@@ -27,6 +34,18 @@ const Cart = () => {
       return product ? { ...product, ...entry } : null;
     })
     .filter(Boolean); // remove nulls
+
+  const updateQuantityCart = (event, item) => {
+    const newQty = event.target.valueAsNumber;
+    if (!isNaN(newQty) && newQty >= 1) {
+      updateQuantity(item._id, item.size, newQty);
+    }
+  };
+
+  const navigate = useNavigate();
+  const handlePlaceOrder = () => {
+    navigate("/place-order");
+  };
 
   return (
     <>
@@ -52,11 +71,12 @@ const Cart = () => {
                   </div>
                 </div>
                 <input
+                  onChange={(e) => updateQuantityCart(e, item)}
                   className="border border-gray-200 bg-gray-100 w-10 h-10 flex flex-row justify-center items-center text-center"
                   type="number"
-                  min={1}
-                  defaultValue={item.quantity}
+                  value={item.quantity}
                 />
+
                 <img
                   onClick={() => updateQuantity(item._id, item.size, 0)}
                   src={assets.bin_icon}
@@ -84,7 +104,10 @@ const Cart = () => {
                 ${getTotalPrice() + delivery_fee}
               </p>
             </div>
-            <button className="bg-black text-white p-2 mt-3 ">
+            <button
+              onClick={handlePlaceOrder}
+              className="bg-black text-white p-2 mt-3 "
+            >
               PROCCED TO CHECKOUT
             </button>
           </div>
