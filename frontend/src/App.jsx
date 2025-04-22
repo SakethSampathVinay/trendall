@@ -7,6 +7,7 @@ import Collections from "./pages/Collections.jsx";
 import Product from "./pages/Product.jsx";
 import Cart from "./pages/Cart.jsx";
 import PlaceOrder from "./pages/PlaceOrder.jsx";
+import Orders from "./pages/Orders.jsx";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/place-order" element={<PlaceOrder />} />
+        <Route path="/orders" element={<Orders />} />
       </Routes>
       <Footer />
     </div>

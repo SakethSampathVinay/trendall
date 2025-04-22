@@ -80,12 +80,12 @@ const Cart = () => {
                 <img
                   onClick={() => updateQuantity(item._id, item.size, 0)}
                   src={assets.bin_icon}
-                  className="h-5 w-5 justify-center items-center"
+                  className="h-5 w-5 justify-center items-center ml-1"
                 />
               </div>
             </Fragment>
           ))}
-          <div className="flex flex-col w-[250px] justify-between ml-auto">
+          <div className="w-full flex flex-col md:w-[250px] justify-between md:ml-auto">
             <h1 className="text-2xl font-bold mb-4 text-gray-800">
               Cart Totals
             </h1>
@@ -106,7 +106,7 @@ const Cart = () => {
             </div>
             <button
               onClick={handlePlaceOrder}
-              className="bg-black text-white p-2 mt-3 "
+              className="bg-black text-white p-2 mt-3 cursor-pointer"
             >
               PROCCED TO CHECKOUT
             </button>
