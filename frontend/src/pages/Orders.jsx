@@ -11,7 +11,6 @@ const Orders = () => {
           key={index}
           className="flex flex-col md:flex-row justify-between items-center gap-4 border-b py-4"
         >
-          {/* Left: Image + Info */}
           <div className="flex items-center gap-4 w-full md:w-1/2">
             <img
               src={product.image}
@@ -29,13 +28,11 @@ const Orders = () => {
             </div>
           </div>
 
-          {/* Center: Order Status */}
           <div className="flex items-center gap-2">
             <span className="bg-green-600 rounded-full h-3 w-3"></span>
             <h1 className="text-sm font-medium text-green-700">Order Placed</h1>
           </div>
 
-          {/* Right: Track Order Button */}
           <div>
             <button className="border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 transition">
               Track Order
