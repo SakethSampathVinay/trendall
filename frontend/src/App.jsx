@@ -9,6 +9,7 @@ import Cart from "./pages/Cart.jsx";
 import PlaceOrder from "./pages/PlaceOrder.jsx";
 import Orders from "./pages/Orders.jsx";
 import About from "./pages/About.jsx";
+import Contact from "./pages/ContactUs.jsx";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </div>
