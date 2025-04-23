@@ -11,6 +11,7 @@ import Orders from "./pages/Orders.jsx";
 import About from "./pages/About.jsx";
 import Contact from "./pages/ContactUs.jsx";
 import Login from "./pages/Login.jsx";
+import Notfound from "./components/Notfound.jsx";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Notfound />} />
       </Routes>
       <Footer />
     </div>
