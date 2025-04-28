@@ -112,7 +112,44 @@ const registerUser = async (request, response) => {
 };
 
 const adminLogin = async (request, response) => {
+  const { email, password } = request.body;
 
-}
+  if (!email || !password) {
+    return response
+      .status(400)
+      .json({ success: false, message: "Please fill all the fields" });
+  }
+
+  if (password.length < 8) {
+    return response.status(400).json({
+      success: false,
+      message: "Password must be at least 8 characters long",
+    });
+  }
+
+  if (
+    email !== process.env.ADMIN_EMAIL ||
+    password !== process.env.ADMIN_PASSWORD
+  ) {
+    return response
+      .status(401)
+      .json({ success: false, message: "Invalid email or password" });
+  }
+
+  const token = jwt.sign(
+    { id: 1, email: email, role: "admin" },
+    process.env.JWT_SECRET
+  );
+
+  if (token) {
+    return response
+      .status(200)
+      .json({ success: true, message: "Login successfully", token });
+  } else {
+    return response
+      .status(500)
+      .json({ success: false, message: "Something went wrong" });
+  }
+};
 
 export { loginUser, registerUser, adminLogin };

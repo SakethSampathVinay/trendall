@@ -3,7 +3,7 @@ import { assets } from "../assets/assets.js";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { ShopContext } from "../context/ShopContext.jsx";
+import { ShopContext } from "../Context/ShopContext.jsx";
 
 const Navbar = () => {
   const { getTotalItemsCount } = useContext(ShopContext);
@@ -25,10 +25,8 @@ const Navbar = () => {
         <NavLink to="/contact">CONTACT</NavLink>
       </ul>
       <div className="flex items-center gap-6">
-        <img src={assets.search_icon} className="w-5 cursor-pointer" alt="" />
         <div className="relative group">
           <img src={assets.profile_icon} className="w-5 cursor-pointer" />
-
           <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
             <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded-2xl">
               <Link to="/login">
