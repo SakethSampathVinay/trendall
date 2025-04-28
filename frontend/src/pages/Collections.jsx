@@ -9,6 +9,12 @@ const Collections = () => {
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [sortType, setSortType] = useState("relevant");
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+  };
 
   const toggleCategory = (event) => {
     const value = event.target.value;
@@ -46,6 +52,12 @@ const Collections = () => {
       );
     }
 
+    if (search.trim() !== "") {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
     // Sort the products based on selected sort type
     if (sortType === "lowToHigh") {
       filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
@@ -54,7 +66,7 @@ const Collections = () => {
     }
 
     setAllProducts(filteredProducts);
-  }, [products, categories, subCategories, sortType]);
+  }, [products, categories, subCategories, sortType, search]);
 
   // Handle sort selection change
   const handleSortChange = (e) => {
@@ -134,6 +146,12 @@ const Collections = () => {
         <div className="sm:flex md:hidden flex flex-col">
           <div className="flex flex-row">
             <h1 className="font-normal text-2xl mt-3 ">FILTERS</h1>
+            <input
+              type="search"
+              placeholder="Search"
+              className="border border-gray-400 p-2 ml-auto mr-2 mt-2"
+              onChange={handleSearch}
+            />
             <button className="text-2xl pl-3 pt-3" onClick={toggleFilter}>
               {filter ? "✖" : "☰"}
             </button>
@@ -178,8 +196,14 @@ const Collections = () => {
             <h1 className="text-gray-700 font-bold pt-2 pr-5">
               ALL COLLECTIONS
             </h1>
+            <input
+              type="search"
+              placeholder="Search"
+              className="border border-gray-400 p-2 ml-auto mr-2 hidden md:block"
+              onChange={handleSearch}
+            />
             <select
-              className="border border-gray-400 p-2 ml-auto"
+              className="border border-gray-400 p-2 ml-end"
               onChange={handleSortChange}
               value={sortType}
             >

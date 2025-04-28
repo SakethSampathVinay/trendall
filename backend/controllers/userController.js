@@ -111,4 +111,8 @@ const registerUser = async (request, response) => {
   }
 };
 
-export { loginUser, registerUser };
+const adminLogin = async (request, response) => {
+
+}
+
+export { loginUser, registerUser, adminLogin };
