@@ -30,7 +30,7 @@ const addProduct = async (req, res) => {
     );
 
     const imagesString = imagesUrl.join(",");
-    const sizesString = JSON.stringify(sizes);
+    const sizesString = sizes;
 
     const sql = `
         INSERT INTO products

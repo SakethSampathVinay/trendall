@@ -24,7 +24,7 @@ function App() {
             <Sidebar />
             <div className="flex-1 p-5">
               <Routes>
-                <Route path="/add" element={<AddItem />} />
+                <Route path="/add" element={<AddItem token = {token} />} />
                 <Route path="/list" element={<ListItem />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="*" element={<NotFound />} />
