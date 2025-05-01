@@ -1,14 +1,26 @@
 import { createContext, useState, useEffect } from "react";
-import { products } from "../assets/assets";
+import axios from "axios";
 
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "$";
   const delivery_fee = 10;
-  const [cartItems, setCartItems] = useState({});
 
-  const addToCart = async (itemId, size) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const [cartItems, setCartItems] = useState(() => {
+    const localData = localStorage.getItem("cartItems");
+    return localData ? JSON.parse(localData) : {};
+  });
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (itemId, size) => {
     let cartData = structuredClone(cartItems);
 
     if (cartData[itemId]) {
@@ -24,21 +36,17 @@ const ShopContextProvider = (props) => {
     setCartItems(cartData);
   };
 
-  const updateQuantity = async (itemId, size, quantity) => {
+  const updateQuantity = (itemId, size, quantity) => {
     let cartData = structuredClone(cartItems);
 
     if (quantity <= 0) {
-      // Delete size from the product
       if (cartData[itemId]) {
         delete cartData[itemId][size];
-
-        // If the product has no more sizes, remove the product entry
         if (Object.keys(cartData[itemId]).length === 0) {
           delete cartData[itemId];
         }
       }
     } else {
-      // Just update the quantity
       if (!cartData[itemId]) {
         cartData[itemId] = {};
       }
@@ -66,15 +74,25 @@ const ShopContextProvider = (props) => {
     for (const productId in cartItems) {
       for (const size in cartItems[productId]) {
         total += cartItems[productId][size];
-        console.log(total);
       }
     }
     return total;
   };
 
+  const getProductsData = async () => {
+    try {
+      const response = await axios.get(`${backendUrl}/api/product/list`);
+      if (response.data.success) {
+        setProducts(response.data.products);
+      }
+    } catch (error) {
+      console.error("Error Fetching the Data: ", error);
+    }
+  };
+
   useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
+    getProductsData();
+  }, []);
 
   const value = {
     products,
@@ -86,6 +104,7 @@ const ShopContextProvider = (props) => {
     updateQuantity,
     getTotalPrice,
     getTotalItemsCount,
+    backendUrl,
   };
 
   return (

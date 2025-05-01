@@ -46,6 +46,21 @@ const AddItem = ({ token }) => {
         }
       );
 
+      if (response.data.success) {
+        setImage1("");
+        setImage2("");
+        setImage3("");
+        setImage4("");
+        setName("");
+        setDescription("");
+        setCategory("");
+        setCategory("Men");
+        setSubCategory("Topwear");
+        setPrice("");
+        setSizes([]);
+        setBestSeller(false);
+      }
+      
       console.log(response.data);
     } catch (error) {
       console.log("Error Submitting Form: ", error);

@@ -13,7 +13,7 @@ import NotFound from "./components/NotFound";
 import Login from "./components/Login";
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   return (
     <>
@@ -24,18 +24,22 @@ function App() {
             <Sidebar />
             <div className="flex-1 p-5">
               <Routes>
-                <Route path="/add" element={<AddItem token = {token} />} />
-                <Route path="/list" element={<ListItem />} />
+                <Route path="/add" element={<AddItem token={token} />} />
+                <Route
+                  path="/list"
+                  element={<ListItem token={token} setToken={setToken} />}
+                />
                 <Route path="/orders" element={<Orders />} />
-                <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
           </div>
         </>
       ) : (
         <Routes>
-          <Route path="/" element={<Login setToken={setToken} />} />
-          <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route
+            path="/login"
+            element={<Login setToken={setToken} token={token} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}

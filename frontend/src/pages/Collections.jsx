@@ -215,8 +215,8 @@ const Collections = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pt-5 ml-3">
             {allProducts.map((product) => (
               <ProductItem
-                key={product._id}
-                id={product._id}
+                key={product.id}
+                id={product.id}
                 name={product.name}
                 image={product.image}
                 price={product.price}

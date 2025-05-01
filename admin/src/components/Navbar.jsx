@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ setToken }) => {
+const Navbar = ({ token, setToken }) => {
+  const navigate = useNavigate();
+
   const logout = () => {
+    localStorage.removeItem("token");
     setToken(null);
+    navigate("/login");
+
+    console.log(token);
     console.log("Logged out successfully");
   };
 
