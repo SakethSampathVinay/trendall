@@ -60,7 +60,7 @@ const ShopContextProvider = (props) => {
     let total = 0;
     for (const productId in cartItems) {
       for (const size in cartItems[productId]) {
-        const product = products.find((item) => item._id === productId);
+        const product = products.find((item) => item.id === Number(productId));
         if (product) {
           total += product.price * cartItems[productId][size];
         }
