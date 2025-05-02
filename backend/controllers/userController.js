@@ -87,7 +87,7 @@ const registerUser = async (request, response) => {
     const sql = `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`;
     const params = [user.name, user.email, user.password];
 
-    connectToDB.run(sql, params, (error) => {
+    connectToDB.run(sql, params, function (error) {
       if (error) {
         if (error.code === "SQLITE_CONSTRAINT") {
           return response
@@ -98,11 +98,23 @@ const registerUser = async (request, response) => {
             .status(500)
             .json({ success: false, message: error.message });
         }
-      } else {
-        return response
-          .status(201)
-          .json({ success: true, message: "User created successfully" });
       }
+
+      // ✅ Get inserted user ID from `this.lastID`
+      const insertedUserId = this.lastID;
+
+      const token = jwt.sign(
+        { id: insertedUserId, email: user.email },
+        process.env.JWT_SECRET || "dev_secret_key",
+        { expiresIn: "1h" }
+      );
+
+      return response.status(201).json({
+        success: true,
+        message: "User created successfully",
+        token,
+        user: { id: insertedUserId, name: user.name, email: user.email },
+      });
     });
   } catch (error) {
     return response

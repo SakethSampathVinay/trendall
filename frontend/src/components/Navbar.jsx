@@ -1,13 +1,23 @@
 import React, { useContext } from "react";
 import { assets } from "../assets/assets.js";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ShopContext } from "../Context/ShopContext.jsx";
 
 const Navbar = () => {
-  const { getTotalItemsCount } = useContext(ShopContext);
+  const { getTotalItemsCount, token, setToken, setCartItems } =
+    useContext(ShopContext);
   const [visible, setVisible] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setCartItems({});
+    setToken("");
+    navigate("/login");
+  };
 
   return (
     <div className="flex flex-row justify-between items-center">
@@ -35,7 +45,12 @@ const Navbar = () => {
               <Link to="/orders">
                 <p className="cursor-pointer hover:text-black">Orders</p>
               </Link>
-              <p className="cursor-pointer hover:text-black">Logout</p>
+              <p
+                onClick={handleLogout}
+                className="cursor-pointer hover:text-black"
+              >
+                Logout
+              </p>
             </div>
           </div>
         </div>

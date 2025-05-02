@@ -60,7 +60,7 @@ const AddItem = ({ token }) => {
         setSizes([]);
         setBestSeller(false);
       }
-      
+
       console.log(response.data);
     } catch (error) {
       console.log("Error Submitting Form: ", error);
@@ -162,9 +162,9 @@ const AddItem = ({ token }) => {
             className="w-75 p-2 border border-gray-200 rounded-md"
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="men">Men</option>
-            <option value="women">Women</option>
-            <option value="kids">Kids</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
           </select>
         </div>
 
